@@ -32,14 +32,15 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    @Builder.Default
+    private Role role = Role.PATIENT;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
 
     public enum Role {
-        USER,
+        PATIENT,
         DOCTOR,
         ADMIN,
         LAB_WORKER,
@@ -50,4 +51,5 @@ public class User {
         ACTIVE,
         INACTIVE
     }
+
 }

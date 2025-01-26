@@ -15,7 +15,6 @@ public class UserMapper {
                 .password(requestDTO.getPassword())
                 .email(requestDTO.getEmail())
                 .phone(requestDTO.getPhone())
-                .role(requestDTO.getRole())
                 .status(User.Status.ACTIVE)
                 .build();
     }

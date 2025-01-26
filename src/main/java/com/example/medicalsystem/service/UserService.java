@@ -3,6 +3,7 @@ package com.example.medicalsystem.service;
 
 import com.example.medicalsystem.dto.UserRequestDTO;
 import com.example.medicalsystem.dto.UserResponseDTO;
+import com.example.medicalsystem.dto.UserUpdateDTO;
 import com.example.medicalsystem.entity.User;
 import com.example.medicalsystem.mapper.UserMapper;
 import com.example.medicalsystem.repo.UserRepository;
@@ -33,5 +34,80 @@ public class UserService {
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         User savedUser = userRepository.save(userEntity);
         return userMapper.toResponse(savedUser);
+    }
+
+    public UserResponseDTO getUserInfo(String username){
+        User user = userRepository.findByUsername(username);
+        if(user == null) return null;
+        return userMapper.toResponse(user);
+    }
+    public String updateUserDetails(Integer id, UserUpdateDTO userUpdateDTO) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            return "User not found";
+        }
+        StringBuilder updatedFields = new StringBuilder();
+
+        if (userUpdateDTO.getUsername() != null && !userUpdateDTO.getUsername().equals(user.getUsername())) {
+            user.setUsername(userUpdateDTO.getUsername());
+            updatedFields.append("username, ");
+        }
+        if (userUpdateDTO.getFullName() != null && !userUpdateDTO.getFullName().equals(user.getFullName())) {
+            user.setFullName(userUpdateDTO.getFullName());
+            updatedFields.append("fullName, ");
+        }
+        if (userUpdateDTO.getPassword() != null && !userUpdateDTO.getPassword().equals(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(userUpdateDTO.getPassword()));
+            updatedFields.append("password, ");
+        }
+        if (userUpdateDTO.getEmail() != null && !userUpdateDTO.getEmail().equals(user.getEmail())) {
+            user.setEmail(userUpdateDTO.getEmail());
+            updatedFields.append("email, ");
+        }
+        if (userUpdateDTO.getPhone() != null && !userUpdateDTO.getPhone().equals(user.getPhone())) {
+            user.setPhone(userUpdateDTO.getPhone());
+            updatedFields.append("phone, ");
+        }
+    
+        if (updatedFields.length() > 0) {
+            updatedFields.setLength(updatedFields.length() - 2);
+            userRepository.save(user);
+            return updatedFields.toString() + " changed successfully";
+        }
+ 
+        return "No fields were updated";
+    }
+    
+
+    public String deactivateUser(Integer id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            return "User not found";
+        }
+    
+        if (user.getStatus() == User.Status.INACTIVE) {
+            return "User is already deactivated";
+        }
+    
+        // Deactivate the user
+        user.setStatus(User.Status.INACTIVE);
+        userRepository.save(user);
+        return "User deactivated successfully";
+    }
+    
+    public String activateUser(Integer id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            return "User not found";
+        }
+    
+        if (user.getStatus() == User.Status.ACTIVE) {
+            return "User is already active";
+        }
+    
+        // Activate the user
+        user.setStatus(User.Status.ACTIVE);
+        userRepository.save(user);
+        return "User activated successfully";
     }
 }

@@ -1,5 +1,4 @@
 package com.example.medicalsystem.dto;
-import com.example.medicalsystem.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -40,8 +39,4 @@ public class UserRequestDTO {
     @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Phone number must be valid")
     @JsonProperty("phone")
     private String phone;
-
-    @NotNull(message = "Role is required")
-    @JsonProperty("role")
-    private User.Role role;
 }
