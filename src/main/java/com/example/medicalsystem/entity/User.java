@@ -44,7 +44,8 @@ public class User {
         DOCTOR,
         ADMIN,
         LAB_WORKER,
-        APPOINTMENT_MANAGER
+        APPOINTMENT_MANAGER,
+        USER
     }
 
     public enum Status {
