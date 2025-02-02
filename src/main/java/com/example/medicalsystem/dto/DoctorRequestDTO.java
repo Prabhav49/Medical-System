@@ -9,8 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserRequestDTO {
-    
+public class DoctorRequestDTO {
+
     @NotNull(message = "Username is required")
     @NotEmpty(message = "Username should not be empty")
     @NotBlank(message = "Username should not be blank")
@@ -42,18 +42,23 @@ public class UserRequestDTO {
     @JsonProperty("phone")
     private String phone;
 
-    @NotNull(message = "Date of Birth is required")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @JsonProperty("dateOfBirth")
-    private String dateOfBirth;
-
     @NotNull(message = "Gender is required")
     @JsonProperty("gender")
     private String gender;
 
-    @NotNull(message = "Address is required")
-    @NotEmpty(message = "Address should not be empty")
-    @NotBlank(message = "Address should not be blank")
-    @JsonProperty("address")
-    private String address;
+    @NotNull(message = "Specialization is required")
+    @NotEmpty(message = "Specialization should not be empty")
+    @NotBlank(message = "Specialization should not be blank")
+    @JsonProperty("specialization")
+    private String specialization;
+
+    @NotNull(message = "Experience is required")
+    @NotEmpty(message = "Experience should not be empty")
+    @NotBlank(message = "Experience should not be blank")
+    @JsonProperty("experience")
+    private String experience;
+
+    @NotNull(message = "Status is required")
+    @JsonProperty("status")
+    private String status;
 }
