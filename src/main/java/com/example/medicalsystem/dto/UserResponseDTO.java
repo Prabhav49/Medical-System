@@ -25,9 +25,6 @@ public class UserResponseDTO {
     @JsonProperty("phone")
     private String phone;
 
-    @JsonProperty("role")
-    private User.Role role;
-
     @JsonProperty("status")
     private User.Status status;
 }
