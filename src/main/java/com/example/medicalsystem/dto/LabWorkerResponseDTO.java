@@ -1,7 +1,6 @@
 package com.example.medicalsystem.dto;
 
-import com.example.medicalsystem.entity.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.example.medicalsystem.entity.LabWorker;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,10 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserResponseDTO {
+public class LabWorkerResponseDTO {
 
-    @JsonProperty("username")
-    private String username;
+    @JsonProperty("id")
+    private Integer id;
 
     @JsonProperty("fullName")
     private String fullName;
@@ -26,16 +25,9 @@ public class UserResponseDTO {
     @JsonProperty("phone")
     private String phone;
 
-    @JsonProperty("dateOfBirth")
-    @JsonFormat(pattern = "dd MM yyyy")
-    private String dateOfBirth;
-
-    @JsonProperty("gender")
-    private String gender;
-
-    @JsonProperty("address")
-    private String address;
+    @JsonProperty("labDepartment")
+    private String labDepartment;
 
     @JsonProperty("status")
-    private User.Status status;
+    private LabWorker.Status status;
 }
