@@ -4,7 +4,6 @@ import com.example.medicalsystem.dto.UserResponseDTO;
 import com.example.medicalsystem.dto.UserUpdateDTO;
 import com.example.medicalsystem.service.UserService;
 
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

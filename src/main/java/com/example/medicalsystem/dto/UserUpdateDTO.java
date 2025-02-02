@@ -1,17 +1,17 @@
 package com.example.medicalsystem.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.Size;
-import lombok.Builder;
-import lombok.Data;
-import lombok.*;
 import jakarta.validation.constraints.*;
+import lombok.*;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class UserUpdateDTO {
+
     @JsonProperty("username")
     private String username;
 
@@ -22,10 +22,26 @@ public class UserUpdateDTO {
     @JsonProperty("password")
     private String password;
 
+    @Email(message = "Invalid email format")
     @JsonProperty("email")
     private String email;
 
     @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Phone number must be valid")
     @JsonProperty("phone")
     private String phone;
+
+    @JsonProperty("dateOfBirth")
+    @JsonFormat(pattern = "dd MM yyyy")
+    private LocalDate dateOfBirth;
+
+    @Pattern(regexp = "^(MALE|FEMALE|OTHER)$", message = "Gender must be MALE, FEMALE, or OTHER")
+    @JsonProperty("gender")
+    private String gender;
+
+    @JsonProperty("address")
+    private String address;
+
+    @Pattern(regexp = "^(ACTIVE|INACTIVE)$", message = "Status must be ACTIVE or INACTIVE")
+    @JsonProperty("status")
+    private String status;
 }

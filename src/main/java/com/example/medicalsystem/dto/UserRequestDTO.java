@@ -1,23 +1,26 @@
 package com.example.medicalsystem.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class UserRequestDTO {
-
+    
     @NotNull(message = "Username is required")
     @NotEmpty(message = "Username should not be empty")
     @NotBlank(message = "Username should not be blank")
     @JsonProperty("username")
     private String username;
 
-    @NotNull(message = "Username is required")
-    @NotEmpty(message = "Username should not be empty")
-    @NotBlank(message = "Username should not be blank")
+    @NotNull(message = "Full Name is required")
+    @NotEmpty(message = "Full Name should not be empty")
+    @NotBlank(message = "Full Name should not be blank")
     @JsonProperty("fullName")
     private String fullName;
 
@@ -39,4 +42,19 @@ public class UserRequestDTO {
     @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "Phone number must be valid")
     @JsonProperty("phone")
     private String phone;
+
+    @NotNull(message = "Date of Birth is required")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonProperty("dateOfBirth")
+    private String dateOfBirth;
+
+    @NotNull(message = "Gender is required")
+    @JsonProperty("gender")
+    private String gender;
+
+    @NotNull(message = "Address is required")
+    @NotEmpty(message = "Address should not be empty")
+    @NotBlank(message = "Address should not be blank")
+    @JsonProperty("address")
+    private String address;
 }
