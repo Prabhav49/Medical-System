@@ -8,8 +8,6 @@ import com.example.medicalsystem.entity.User;
 import com.example.medicalsystem.mapper.UserMapper;
 import com.example.medicalsystem.repo.UserRepository;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -52,7 +50,6 @@ public class UserService {
         }
 
         StringBuilder updatedFields = new StringBuilder();
-        DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MM yyyy");
 
         if (userUpdateDTO.getFullName() != null && !userUpdateDTO.getFullName().equals(user.getFullName())) {
             user.setFullName(userUpdateDTO.getFullName());
@@ -92,9 +89,6 @@ public class UserService {
 
         return "No fields were updated";
     }
-
-    
-    
 
     public String deactivateUser(Integer id) {
         User user = userRepository.findById(id).orElse(null);

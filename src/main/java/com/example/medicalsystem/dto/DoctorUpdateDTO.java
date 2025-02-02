@@ -40,12 +40,10 @@ public class DoctorUpdateDTO {
 
     @JsonProperty("address")
     private String address;
-
-    @NotNull(message = "Specialization is required")
+    
     @JsonProperty("specialization")
     private String specialization;
 
-    @NotNull(message = "Experience is required")
     @JsonProperty("experience")
     private String experience;
 

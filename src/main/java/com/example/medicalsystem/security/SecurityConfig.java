@@ -20,12 +20,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable() // Disable CSRF for simplicity in a token-based authentication system
+            .csrf().disable() 
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/api/users/register", "/api/auth/**","/api/admin/*").permitAll() // Publicly accessible endpoints
-                .anyRequest().authenticated()) // Require authentication for all other endpoints
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // Add JWT filter before authentication filter
-
+                .requestMatchers("/api/users/register", "/api/auth/**").permitAll() 
+                .anyRequest().authenticated()) 
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
