@@ -1,12 +1,9 @@
 package com.example.medicalsystem.controller;
 
-import com.example.medicalsystem.dto.AdminRequestDTO;
-import com.example.medicalsystem.dto.AdminResponseDTO;
-import com.example.medicalsystem.dto.DoctorRequestDTO;
-import com.example.medicalsystem.dto.DoctorResponseDTO;
-import com.example.medicalsystem.dto.DoctorUpdateDTO;
+import com.example.medicalsystem.dto.*;
 import com.example.medicalsystem.service.AdminService;
 import com.example.medicalsystem.service.DoctorService;
+import com.example.medicalsystem.service.LabWorkerService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +14,13 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     private final DoctorService doctorService;
+    private final LabWorkerService labWorkerService;
     private final AdminService adminService;
 
-    public AdminController(DoctorService doctorService, AdminService adminService) {
+    public AdminController(DoctorService doctorService, AdminService adminService, LabWorkerService labWorkerService) {
         this.doctorService = doctorService;
         this.adminService = adminService;
+        this.labWorkerService = labWorkerService;
     }
 
     @PostMapping("/register")
@@ -36,25 +35,9 @@ public class AdminController {
         return new ResponseEntity<>(registeredDoctor, HttpStatus.CREATED);
     }
 
-    @GetMapping("/getDoctorByUsername/{username}")
-    public ResponseEntity<DoctorResponseDTO> getDoctorByUsername(@PathVariable String username) {
-        DoctorResponseDTO doctor = doctorService.getDoctorInfo(username);
-        if (doctor == null) return ResponseEntity.status(404).body(null);
-        return ResponseEntity.ok(doctor);
-    }
-
-    @PatchMapping("/update-doctor/{id}")
-    public String updateDoctorDetails(@PathVariable Integer id, @Valid @RequestBody DoctorUpdateDTO doctorUpdateDTO) {
-        return doctorService.updateDoctorDetails(id, doctorUpdateDTO);
-    }
-
-    @PutMapping("/deactivate-doctor/{id}")
-    public String deactivateDoctor(@PathVariable Integer id) {
-        return doctorService.deactivateDoctor(id);
-    }
-
-    @PutMapping("/activate-doctor/{id}")
-    public String activateDoctor(@PathVariable Integer id) {
-        return doctorService.activateDoctor(id);
+    @PostMapping("/register-labworker")
+    public ResponseEntity<LabWorkerResponseDTO> registerLabWorker(@Valid @RequestBody LabWorkerRequestDTO labWorkerRequestDTO) {
+        LabWorkerResponseDTO registeredLabWorker = labWorkerService.registerLabWorker(labWorkerRequestDTO);
+        return new ResponseEntity<>(registeredLabWorker, HttpStatus.CREATED);
     }
 }

@@ -9,7 +9,12 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class LabWorkerRequestDTO {
-    
+    @NotNull(message = "Username is required")
+    @NotEmpty(message = "Username should not be empty")
+    @NotBlank(message = "Username should not be blank")
+    @JsonProperty("username")
+    private String username;
+
     @NotNull(message = "Full Name is required")
     @NotEmpty(message = "Full Name should not be empty")
     @NotBlank(message = "Full Name should not be blank")

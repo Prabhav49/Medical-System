@@ -10,6 +10,7 @@ public class LabWorkerMapper {
 
     public LabWorker toEntity(LabWorkerRequestDTO requestDTO) {
         return LabWorker.builder()
+                .username(requestDTO.getUsername())
                 .fullName(requestDTO.getFullName())
                 .password(requestDTO.getPassword())
                 .email(requestDTO.getEmail())
@@ -21,6 +22,7 @@ public class LabWorkerMapper {
 
     public LabWorkerResponseDTO toResponse(LabWorker labWorker) {
         return LabWorkerResponseDTO.builder()
+                .username(labWorker.getUsername())
                 .fullName(labWorker.getFullName())
                 .email(labWorker.getEmail())
                 .phone(labWorker.getPhone())

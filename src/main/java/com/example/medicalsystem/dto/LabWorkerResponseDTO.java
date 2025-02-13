@@ -16,6 +16,9 @@ public class LabWorkerResponseDTO {
     @JsonProperty("id")
     private Integer id;
 
+    @JsonProperty("username")
+    private String username;
+
     @JsonProperty("fullName")
     private String fullName;
 

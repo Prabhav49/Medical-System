@@ -10,6 +10,9 @@ import lombok.*;
 @Builder
 public class LabWorkerUpdateDTO {
 
+    @JsonProperty("username")
+    private String username;
+
     @JsonProperty("fullName")
     private String fullName;
 
